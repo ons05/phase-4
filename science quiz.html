@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fun Trivia Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .quiz-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question h3 {
+      margin-bottom: 10px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+    }.options label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .options input {
+      margin-right: 10px;
+    }
+    .correct {
+      background-color: lightgreen;
+    }
+    .incorrect {
+      background-color: lightcoral;
+    }
+    .progress-container {
+      width: 100%;
+       border-radius: 10px;
+       margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      height: 20px;
+      background-color: #76c7c0;
+      text-align: center;
+      color: white;
+      line-height: 20px;
+    border-radius: 10px;
+  }
+     
+  </style>
+</head>
+<body>
+  <h1>Fun Trivia Quiz</h1>
+  <div class="quiz-container">
+    <form id="quiz">
+      <div class="progress-bar" id="progress-bar"></div>
+
+      <div class="question"></div>
+      <div id="points" class="points">Current score: 0</div>
+     </form>
+  </div>
+  <script>
+    const questions = [
+      {
+        question: "What is the chemical symbol for water?",
+        options: { A: "H2O", B: "CO2", C: "NaCl", D: "O2" },
+        answer: "A"
+      },
+      {
+        question: "Which planet is known as the Red Planet?",
+        options: { A: "Venus", B: "Mars", C: "Jupiter", D: "Saturn" },
+        answer: "B"
+      },
+      {
+        question: "What gas do plants absorb from the atmosphere during photosynthesis?",
+        options: { A: "Oxygen", B: "Nitrogen", C: "Carbon Dioxide", D: "Helium" },
+        answer: "C"
+      },
+      {
+        question: "What is the hardest natural substance on Earth?",
+        options: { A: "Gold", B: "Diamond", C: "Iron", D: "Granite" },
+        answer: "B"
+      },
+      {
+        question: "Which part of the human cell contains the genetic material?",
+        options: { A: "Cytoplasm", B: "Mitochondria", C: "Nucleus", D: "Ribosome" },
+        answer: "C"
+      },
+      {
+        question: "What is the speed of light in a vacuum?",
+        options: { A: "300,000 km/s", B: "150,000 km/s", C: "1,000 km/s", D: "3,000 km/s" },
+        answer: "A"
+      },
+      {
+        question: "Which planet is the largest in our solar system?",
+        options: { A: "Earth", B: "Saturn", C: "Jupiter", D: "Neptune" },
+        answer: "C"
+      },
+      {
+        question: "What is the most abundant gas in Earth's atmosphere?",
+        options: { A: "Oxygen", B: "Carbon Dioxide", C: "Nitrogen", D: "Hydrogen" },
+        answer: "C"
+      }
+    ];
+    let currentQuestionIndex = 0;  
+    let score = 0;  
+    const userResponses = [];  
+
+    //afficher une question a la fois
+    const updateQuestion = () => {
+      const currentQuestion = questions[currentQuestionIndex];
+      const questionElement = document.querySelector(".question");
+      questionElement.innerHTML = `
+        <h3>${currentQuestionIndex + 1}. ${currentQuestion.question}</h3>
+        <div class="options">
+          ${Object.entries(currentQuestion.options).map(([key, value]) => `
+            <label>
+              <input type="radio" name="${currentQuestionIndex}" value="${key}" />
+              ${key}) ${value}
+            </label>
+          `).join('')}
+        </div>
+      `;
+
+      //  event listeners 
+      document.querySelectorAll(`input[name="${currentQuestionIndex}"]`).forEach(input => {
+        input.addEventListener('change', () => {
+          userResponses[currentQuestionIndex] = input.value;
+          checkAnswer();  
+        });
+      });
+    };
+
+    // reponses correctes/incorrectes   /incrementation du score
+    const checkAnswer = () => {
+      const selectedOption = document.querySelector(`input[name="${currentQuestionIndex}"]:checked`);
+      const userSelection = selectedOption ? selectedOption.value : null;
+      userResponses[currentQuestionIndex] = userSelection;
+
+      document.querySelectorAll(`input[name="${currentQuestionIndex}"]`).forEach(input => {
+        const label = input.parentElement;
+        if (input.value === questions[currentQuestionIndex].answer) {
+          label.classList.add('correct');
+        } else if (input.checked) {
+          label.classList.add('incorrect');
+        }
+      });
+
+      if (userSelection === questions[currentQuestionIndex].answer) {
+        score++;
+        
+    const points = document.getElementById('points');
+        points.innerText = `Current Score: ${score}`;
+ 
+    
+      }
+
+      //   question suivante
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        setTimeout(updateQuestion, 1000);  
+      } else {
+        setTimeout(showResults, 1000);  
+      }updateProgressBar();
+
+    };
+
+    // resultas du quiz 
+    const showResults = () => {
+      let resultHTML = `<h2>Your Score: ${score} out of ${questions.length}</h2>`;
+      resultHTML += '<h3>Your Answers:</h3><ul>';
+
+      questions.forEach((question, index) => {
+        const correctAnswer = question.answer;
+        const userAnswer = userResponses[index] || 'No answer';
+
+        resultHTML += `
+          <li>
+            ${index + 1}. ${question.question}<br />
+            Your answer: ${userAnswer} (Correct: ${correctAnswer})
+          </li>`;
+      });
+
+      resultHTML += '</ul>';
+      document.querySelector(".quiz-container").innerHTML = resultHTML;
+    };
+    
+    const progressBar = document.getElementById('progress-bar');
+    const totalQuestions = 8;
+    function updateProgressBar() {
+  const progress = (currentQuestionIndex  / totalQuestions) * 100;
+  progressBar.style.width = progress + '%';
+  progressBar.textContent = Math.round(progress) + '%'; // Optional: Display percentage text
+}
+updateProgressBar();
+
+    updateQuestion();  
+  </script>
+</body>
+</html>

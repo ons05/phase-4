@@ -1,0 +1,197 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.navbar img {
+  height: 30px;
+  margin:0px;
+}
+.droit {
+  display: flex;
+  align-items: center;
+}
+
+.droit i {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+.droit h1 {
+  margin-right: 20px;
+  color: rgb(82, 82, 172);
+  font-family: cursive;
+  font-size: 200%;
+}
+
+.droit ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.droit li {
+  margin-right: 15px;
+  font-size: 112%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.droit a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.gauche button {
+  margin-left: 10px;
+  display: inline-block;
+  border: 2px solid rgb(82, 82, 172);
+  border-radius: 20px;
+  font-size: 112%;
+  padding: 8px 12px;
+  background-color: rgb(235, 232, 228);
+  cursor: pointer;
+}
+
+h2 {
+  padding: 50px;
+  color: rgb(82, 82, 172);
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.photo-gallery button {
+  margin-top: 20px;
+  padding: 15px 30px;
+  background-color: rgb(82, 82, 172);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+.photo-item {
+  text-align: left;
+  color: gray;
+}
+
+.photo-item img {
+  width: 90%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.photo-item img:hover {
+  transform: scale(1.05);
+}
+
+.photo-item a {
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+.button-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.level-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+  background-color: rgb(82, 82, 172);
+  color: white;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  justify-content: left;
+  text-align: left;
+}
+
+.selec {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+  background-color: rgb(82, 82, 172);
+  color: white;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  justify-content: left;
+  text-align: left;
+}
+.container {
+  background-color: rgb(82, 82, 172); /* Violet background color for the whole container */
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  width: 100%; /* Ensures the container takes up the full width */
+   height: auto; /* Adjusts to content height */
+   margin: 0 auto; 
+  gap: 50px;
+  padding: 20px; /* Optional: Adds space inside the container */
+}
+
+.violet {
+  background-color: #be82ac; /* Pink background color for the individual items */
+  color: white;
+  border-radius: 15px;
+  padding: 20px;
+  width: 340px; /* Smaller width for the boxes */
+  height: 350px; /* Increased height for the boxes */
+  word-spacing: 30%;
+  line-height: 1.5; /* Adjusted line-height for better readability */
+}
+
+.violet h2 {
+ font-size: 150%;
+  color: white;
+}
+
+.violet p {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+font-size: 120%;}
+
+
+.violet i{
+   font-size: 50px;  
+   text-align: center;
+  width: 100%;
+ }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: grey;
+  font-size: 80%;
+}
